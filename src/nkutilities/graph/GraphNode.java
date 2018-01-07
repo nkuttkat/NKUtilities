@@ -26,140 +26,129 @@ import java.util.HashSet;
  */
 public class GraphNode {
 
-	/** The edges of this node. */
-	private HashMap<Object, HashSet<Edge>> edges;
+    /**
+     * The edges of this node.
+     */
+    private final HashMap<Object, HashSet<Edge>> edges;
 
-	/**
-	 * Instantiates a new node.
-	 */
-	public GraphNode() {
-		this.edges = new HashMap<Object, HashSet<Edge>>();
-	}
+    /**
+     * Instantiates a new node.
+     */
+    public GraphNode() {
+        this.edges = new HashMap<>();
+    }
 
-	/**
-	 * Gets the edges.
-	 * 
-	 * @return the edges
-	 */
-	public HashMap<Object, HashSet<Edge>> getEdges() {
-		return this.edges;
-	}
+    /**
+     * Gets the edges.
+     *
+     * @return the edges
+     */
+    public HashMap<Object, HashSet<Edge>> getEdges() {
+        return this.edges;
+    }
 
-	/**
-	 * Gets the edges associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @return A set of edges associated to the given object
-	 */
-	public HashSet<Edge> getEdgesFor(Object object) {
-		HashSet<Edge> edges = new HashSet<Edge>();
+    /**
+     * Gets the edges associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     * @return A set of edges associated to the given object
+     */
+    public HashSet<Edge> getEdgesFor(Object object) {
+        HashSet<Edge> localEdges = new HashSet<>();
 
-		if (this.edges.containsKey(object)) {
-			edges = this.edges.get(object);
-		}
+        if (this.edges.containsKey(object)) {
+            localEdges = this.edges.get(object);
+        }
 
-		return edges;
-	}
+        return localEdges;
+    }
 
-	/**
-	 * Checks if this node is connected to other nodes.
-	 * 
-	 * @return true, if this node is connected to others
-	 */
-	public boolean hasEdges() {
-		return !this.edges.isEmpty();
-	}
+    /**
+     * Checks if this node is connected to other nodes.
+     *
+     * @return true, if this node is connected to others
+     */
+    public boolean hasEdges() {
+        return !this.edges.isEmpty();
+    }
 
-	/**
-	 * Checks if this node has edges associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @return true, if this node is connected to others
-	 */
-	public boolean hasEdges(Object object) {
-		return !this.edges.isEmpty() && this.edges.containsKey(object);
-	}
+    /**
+     * Checks if this node has edges associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     * @return true, if this node is connected to others
+     */
+    public boolean hasEdges(Object object) {
+        return !this.edges.isEmpty() && this.edges.containsKey(object);
+    }
 
-	/**
-	 * Removes all edges associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 */
-	public void removeEdges(Object object) {
-		this.edges.remove(object);
-	}
+    /**
+     * Removes all edges associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     */
+    public void removeEdges(Object object) {
+        this.edges.remove(object);
+    }
 
-	/**
-	 * Sets an edge associated to the given object. If there is already an edge
-	 * pointing at the same node as the given edge this method will replace the
-	 * existing edge.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @param edge
-	 *            the edge
-	 */
-	public void setEdge(Object object, Edge edge) {
-		if (!this.edges.containsKey(object)) {
-			this.edges.put(object, new HashSet<Edge>());
-		}
+    /**
+     * Sets an edge associated to the given object. If there is already an edge
+     * pointing at the same node as the given edge this method will replace the
+     * existing edge.
+     *
+     * @param object The object whose edges will be considered
+     * @param edge the edge
+     */
+    public void setEdge(Object object, Edge edge) {
+        if (!this.edges.containsKey(object)) {
+            this.edges.put(object, new HashSet<>());
+        }
 
-		// remove the edge first if there is already a node pointing at the same
-		// node as edge
-		if (this.edges.get(object).contains(edge)) {
-			this.edges.get(object).remove(edge);
-		}
+        // remove the edge first if there is already a node pointing at the same
+        // node as edge
+        if (this.edges.get(object).contains(edge)) {
+            this.edges.get(object).remove(edge);
+        }
 
-		this.edges.get(object).add(edge);
-	}
+        this.edges.get(object).add(edge);
+    }
 
-	/**
-	 * Sets an edge associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @param node
-	 *            The node the edge is pointing at
-	 */
-	public void setEdge(Object object, GraphNode node) {
-		this.setEdge(object, node, 1.0);
-	}
+    /**
+     * Sets an edge associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     * @param node The node the edge is pointing at
+     */
+    public void setEdge(Object object, GraphNode node) {
+        this.setEdge(object, node, 1.0);
+    }
 
-	/**
-	 * Sets an edge associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @param node
-	 *            The node the edge is pointing at
-	 * @param weight
-	 *            The weight
-	 */
-	public void setEdge(Object object, GraphNode node, java.lang.Double weight) {
-		Edge edge;
+    /**
+     * Sets an edge associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     * @param node The node the edge is pointing at
+     * @param weight The weight
+     */
+    public void setEdge(Object object, GraphNode node, java.lang.Double weight) {
+        Edge edge;
 
-		if (weight == null) {
-			weight = 1.0;
-		}
+        if (weight == null) {
+            weight = 1.0;
+        }
 
-		edge = new Edge(node, weight);
-		this.setEdge(object, edge);
-	}
+        edge = new Edge(node, weight);
+        this.setEdge(object, edge);
+    }
 
-	/**
-	 * Sets an edge associated to the given object.
-	 * 
-	 * @param object
-	 *            The object whose edges will be considered
-	 * @param node
-	 *            The node the edge is pointing at
-	 * @param weight
-	 *            The weight
-	 */
-	public void setEdge(Object object, GraphNode node, java.lang.Integer weight) {
-		this.setEdge(object, node, weight.doubleValue());
-	}
+    /**
+     * Sets an edge associated to the given object.
+     *
+     * @param object The object whose edges will be considered
+     * @param node The node the edge is pointing at
+     * @param weight The weight
+     */
+    public void setEdge(Object object, GraphNode node, java.lang.Integer weight) {
+        this.setEdge(object, node, weight.doubleValue());
+    }
 }

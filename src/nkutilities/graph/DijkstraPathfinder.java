@@ -22,80 +22,79 @@ import java.util.PriorityQueue;
 
 /**
  * The Class DijkstraPathfinder uses the Dijkstra algorithm for pathfinding.
- * 
+ *
  * @author Nils Kuttkat
  */
 public class DijkstraPathfinder extends AbstractPathfinder {
 
-	/*
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see util.graph.AbstractGraph#findPath(java.lang.Object,
 	 * util.graph.GraphNode, util.graph.GraphNode)
-	 */
-	@Override
-	public ArrayList<GraphNode> findPath(Object object, GraphNode startNode, GraphNode targetNode) {
-		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
-		GraphNode currentNode = startNode;
+     */
+    @Override
+    public ArrayList<GraphNode> findPath(Object object, GraphNode startNode, GraphNode targetNode) {
+        PriorityQueue<Edge> queue = new PriorityQueue<>();
+        GraphNode currentNode = startNode;
 
-		this.clearState();
-		this.setDistanceForNode(currentNode, 0);
+        this.clearState();
+        this.setDistanceForNode(currentNode, 0);
 
-		// while the current visited node is not the target node...
-		while (currentNode != targetNode) {
-			HashSet<Edge> edges = currentNode.getEdgesFor(object);
-			double currentDistance = this.getDistanceForNode(currentNode);
+        // while the current visited node is not the target node...
+        while (currentNode != targetNode) {
+            HashSet<Edge> edges = currentNode.getEdgesFor(object);
+            double currentDistance = this.getDistanceForNode(currentNode);
 
-			this.setNodeVisited(currentNode, true);
+            this.setNodeVisited(currentNode, true);
 
-			// take a look at all the neighbors of currentNode
-			for (Edge edge : edges) {
-				GraphNode neighbor = edge.getNode();
+            // take a look at all the neighbors of currentNode
+            for (Edge edge : edges) {
+                GraphNode neighbor = edge.getNode();
 
-				if (!this.isNodeVisited(neighbor)) {
-					double distanceToNeighbor = edge.getWeight();
+                if (!this.isNodeVisited(neighbor)) {
+                    double distanceToNeighbor = edge.getWeight();
 
-					// set the neighbors distance if it is smaller than the current distance
-					if (this.getDistanceForNode(neighbor) > currentDistance	+ distanceToNeighbor) {
-						this.setDistanceForNode(neighbor, currentDistance + distanceToNeighbor);
-						this.setPredecessorForNode(neighbor, currentNode);
-						// associate the neighbor to the new distance (using a temporary Edge) and
-						// put it into a PriorityQueue
-						queue.add(new Edge(neighbor, currentDistance + distanceToNeighbor));
-					}
-				}
-			}
+                    // set the neighbors distance if it is smaller than the current distance
+                    if (this.getDistanceForNode(neighbor) > currentDistance + distanceToNeighbor) {
+                        this.setDistanceForNode(neighbor, currentDistance + distanceToNeighbor);
+                        this.setPredecessorForNode(neighbor, currentNode);
+                        // associate the neighbor to the new distance (using a temporary Edge) and
+                        // put it into a PriorityQueue
+                        queue.add(new Edge(neighbor, currentDistance + distanceToNeighbor));
+                    }
+                }
+            }
 
-			if (!queue.isEmpty()) {
-				currentNode = queue.remove().getNode();
-			} else {
-				break;
-			}
-		}
+            if (!queue.isEmpty()) {
+                currentNode = queue.remove().getNode();
+            } else {
+                break;
+            }
+        }
 
-		return this.getPath(targetNode);
-	}
+        return this.getPath(targetNode);
+    }
 
-	/**
-	 * Gets the path.
-	 * 
-	 * @param targetNode
-	 *            the target node
-	 * @return the path
-	 */
-	protected ArrayList<GraphNode> getPath(GraphNode targetNode) {
-		ArrayList<GraphNode> path = new ArrayList<GraphNode>();
-		GraphNode node = targetNode;
+    /**
+     * Gets the path.
+     *
+     * @param targetNode the target node
+     * @return the path
+     */
+    protected ArrayList<GraphNode> getPath(GraphNode targetNode) {
+        ArrayList<GraphNode> path = new ArrayList<>();
+        GraphNode node = targetNode;
 
-		if (this.getDistanceForNode(targetNode) < Double.POSITIVE_INFINITY) {
+        if (this.getDistanceForNode(targetNode) < Double.POSITIVE_INFINITY) {
 
-			while (node != null) {
-				path.add(0, node); // add at the beginning (similar to a Stack)
-				node = this.getPredecessorForNode(node);
-			}
-		}
+            while (node != null) {
+                path.add(0, node); // add at the beginning (similar to a Stack)
+                node = this.getPredecessorForNode(node);
+            }
+        }
 
-		return path;
-	}
+        return path;
+    }
 
 }

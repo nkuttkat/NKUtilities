@@ -25,75 +25,79 @@ import java.io.Serializable;
  */
 public class Coordinate implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -6195811232944223107L;
-	
-	/** The y. */
-	protected int x, y;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = -6195811232944223107L;
 
-	/**
-	 * Instantiates a new coordinate.
-	 *
-	 * @param x the x
-	 * @param y the y
-	 */
-	public Coordinate(int x, int y) {
-		super();
-		this.x = x;
-		this.y = y;
-	}
+    /**
+     * The y.
+     */
+    protected int x, y;
 
-	/**
-	 * Equals.
-	 *
-	 * @param coordinate the coordinate
-	 * @return true, if successful
-	 */
-	public boolean equals(Coordinate coordinate) {
-		boolean equals = false;
+    /**
+     * Instantiates a new coordinate.
+     *
+     * @param x the x
+     * @param y the y
+     */
+    public Coordinate(int x, int y) {
+        super();
+        this.x = x;
+        this.y = y;
+    }
 
-		if (coordinate != null) {
-			equals = this.getX() == coordinate.getX()
-					&& this.getY() == coordinate.getY();
-		}
+    /**
+     * Equals.
+     *
+     * @param coordinate the coordinate
+     * @return true, if successful
+     */
+    public boolean equals(Coordinate coordinate) {
+        boolean equals = false;
 
-		return equals;
-	}
+        if (coordinate != null) {
+            equals = this.getX() == coordinate.getX()
+                    && this.getY() == coordinate.getY();
+        }
 
-	/**
-	 * Gets the x.
-	 *
-	 * @return the x
-	 */
-	public int getX() {
-		return x;
-	}
+        return equals;
+    }
 
-	/**
-	 * Gets the y.
-	 *
-	 * @return the y
-	 */
-	public int getY() {
-		return y;
-	}
+    /**
+     * Gets the x.
+     *
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
 
-	/* (non-Javadoc)
+    /**
+     * Gets the y.
+     *
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /* (non-Javadoc)
 	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "(" + this.x + "," + this.y + ")";
-	}
+     */
+    @Override
+    public String toString() {
+        return "(" + this.x + "," + this.y + ")";
+    }
 
-	/**
-	 * Translate.
-	 *
-	 * @param x the x
-	 * @param y the y
-	 * @return the coordinate
-	 */
-	public Coordinate translate(int x, int y) {
-		return new Coordinate(this.x + x, this.y + y);
-	}
+    /**
+     * Translate.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the coordinate
+     */
+    public Coordinate translate(int x, int y) {
+        return new Coordinate(this.x + x, this.y + y);
+    }
 }
