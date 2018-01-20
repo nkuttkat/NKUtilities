@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2018 Nils Kuttkat <nkuttkat@gmail.com>
+ * Copyright (C) 2018 Nils Kuttkat<nkuttkat@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package nkutilities.graph;
+
+import java.util.HashSet;
 
 /**
  * The Class Edge points to a {@link GraphNode} considering a specific weight.

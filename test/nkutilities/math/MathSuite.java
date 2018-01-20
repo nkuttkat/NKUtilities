@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 Nils Kuttkat<nkuttkat@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,34 +14,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nkutilities.graph.test;
+package nkutilities.math;
 
-import nkutilities.graph.GraphNode;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
- * The Class TestNode.
  *
- * @author Nils Kuttkat
+ * @author Nils Kuttkat<nkuttkat@gmail.com>
  */
-public class TestNode extends GraphNode {
+@RunWith(Suite.class)
+@Suite.SuiteClasses({nkutilities.math.Vector2DTest.class})
+public class MathSuite {
 
-	/** The name. */
-	protected String name;
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
 
-	/**
-	 * Instantiates a new test node.
-	 *
-	 * @param name the name
-	 */
-	public TestNode(String name) {
-		this.name = name;
-	}
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return this.name;
-	}
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+    
 }
